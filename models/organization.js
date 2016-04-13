@@ -1,22 +1,18 @@
-var http = require("http");
-var request = require("request");
+var github = require("./github")
+var Developer = require("./developer")
 
-function Organization() {
-    this.name = "";
-    this.id = 0;
-    this.members = [];
+function Organization(name) {
+    this.name = name;
 }
-//http://api.github.com/orgs/vtex/members
 
-Organization.prototype.listMembers = function() {
-    var url = "https://api.github.com/orgs/vtex/members";
-    request(url, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            console.log(body);
-        } else {
-            console.log(error);
-        }
-    });
+Organization.prototype.listMembers = function(callback) {
+    github.orgs.getMembers({org:"vtex"}, function(err, res){
+        var items = []
+        res.forEach(function(key){
+            items.push(new Developer(key.id, key.login, key.avatar_url));
+        });
+        callback(items);
+    })
 }
 
 module.exports = Organization;

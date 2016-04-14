@@ -1,9 +1,9 @@
 /** @jsx React.DOM */
 var React = require('react');
+var DevelopersAvaiable = require("./components/Developers.react");
 
-var initialState = JSON.parse(document.getElementById("initialState").innerHTML);
+var element = document.getElementById('react-app');
 
 React.renderComponent(
-    <Developers />,
-    document.getElementById('react-app')
+    <DevelopersAvaiable source='/developer' />, element
 );

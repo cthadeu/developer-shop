@@ -1,0 +1,17 @@
+* {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.dev-item {
+    text-align: center;
+    font-size:1.5em;
+    margin-bottom:100px;
+    color:#666666;
+}
+
+.dev-item > img {
+    border:10px solid #f1f1f1;
+}
+.dev-item > p {
+    font-weight: bold;
+    font-size: 1.2em;
+}

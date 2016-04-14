@@ -2,6 +2,9 @@ var Organization = require("./models/organization");
 var Developer = require("./models/developer");
 var JSX = require('node-jsx').install();
 var React = require('react');
+var Cart = require("./models/cart");
+
+var sess;
 
 module.exports = {
     index: function(req, res) {
@@ -23,8 +26,8 @@ module.exports = {
     },
 
     addDeveloperToCart: function(req, res) {
-        console.log("POST CHEGANDO CERTO");
-        console.log(req.body);
-        res.status(200);
+        cart = new Cart(req.session);
+        cart.addDeveloper(req.body);
+        res.send(cart);
     }
 }

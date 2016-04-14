@@ -8,8 +8,9 @@ module.exports = AddDeveloperToCart = React.createClass({
 
     componentDidMount: function () {
         console.log(this.props.developer);
-        var me = this;
-        $.post("/cart", me.props.developer, function(data) {});
+        $.post("/cart", this.props.developer, function(data) {
+            console.log(data);
+        }.bind(this));
     },
 
     render: function () {

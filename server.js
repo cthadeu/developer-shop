@@ -3,7 +3,8 @@ var express = require('express'),
     http = require('http'),
     mongoose = require('mongoose'),
     routes = require('./routes'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser'),
+    session = require('express-session');
     // config = require('./config'),
     // streamHandler = require('./utils/streamHandler');
 
@@ -14,12 +15,12 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine","handlebars");
+app.use(session({secret:"Xask04klsddwkDslRoqwPerkiwepfjlcvnagjpasdçjargpajD"}));
 
 app.get("/", routes.index);
 app.get("/developer", routes.developers);
 app.get("/developer/:username", routes.developerByUsername);
 app.use("/", urlencodedParser, express.static(__dirname + "/public/"));
-
 app.post("/cart", routes.addDeveloperToCart);
 
 var server = http.createServer(app).listen(port, function() {

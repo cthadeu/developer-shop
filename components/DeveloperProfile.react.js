@@ -27,10 +27,9 @@ module.exports = DeveloperProfile = React.createClass({
     },
 
     addToCartClick: function(){
-        React.renderComponent(
-            <AddDeveloperToCart developer={this.state.developer} />,
-            document.getElementById("stage")
-        )
+        $.post("/cart", this.state.developer, function(data) {
+            console.log(data);
+        }.bind(this));
     },
 
     render: function () {

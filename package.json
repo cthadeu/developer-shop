@@ -16,7 +16,8 @@
     "node-jsx": "~0.11.0",
     "react": "~0.11.2",
     "github":"^0.2.4",
-    "body-parser":"^1.15.0"
+    "body-parser":"^1.15.0",
+    "express-session": "^1.7.6"
   },
   "devDependencies": {
     "browserify": "~6.0.3",

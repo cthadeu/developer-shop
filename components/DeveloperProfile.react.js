@@ -1,5 +1,7 @@
 /** @jsx React.DOM */
 var React = require('react');
+var DeveloperDetail = require("./DeveloperDetail.react");
+var AddDeveloperToCart = require("./AddDeveloperToCart.react");
 
 module.exports = DeveloperProfile = React.createClass({
     getInitialState: function() {
@@ -17,22 +19,27 @@ module.exports = DeveloperProfile = React.createClass({
         }.bind(this));
     },
 
-    openModal: function() {
-        this.state.isModalOpen = true;
+    handleClick: function(){
+        React.renderComponent(
+            <DeveloperDetail developer={this.state.developer} />,
+            document.getElementById("developer-detail")
+        )
     },
 
-    closeModal: function() {
-        this.state.isModalOpen = false;
-    }
-
+    addToCartClick: function(){
+        React.renderComponent(
+            <AddDeveloperToCart developer={this.state.developer} />,
+            document.getElementById("stage")
+        )
+    },
 
     render: function () {
         return (
-             <div className='col-md-2 dev-item wow fadeIn'>
-                <img src={this.state.developer.photo} className="img-responsive img-circle" />
+             <div className='col-md-2 dev-item wow fadeIn' >
+                <img src={this.state.developer.photo} className="img-responsive img-circle"  onClick={this.handleClick} />
                 {this.state.developer.name}
                  <p>${this.state.developer.price}</p>
-                 <button className="btn btn-success">Add to Cart</button>
+                 <button className="btn btn-success" type="button" onClick={this.addToCartClick}>Add to Cart</button>
             </div>
         )
     }

@@ -20,5 +20,11 @@ module.exports = {
         dev.findByUsername(req.param("username"), function(data){
            res.send(data);
         });
+    },
+
+    addDeveloperToCart: function(req, res) {
+        console.log("POST CHEGANDO CERTO");
+        console.log(req.body);
+        res.status(200);
     }
 }

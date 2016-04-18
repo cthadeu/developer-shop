@@ -6,7 +6,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session');
     // config = require('./config'),
-    // streamHandler = require('./utils/streamHandler');
+
 
 var app = express();
 var port = process.env.PORT || 8080;
@@ -20,8 +20,10 @@ app.use(session({secret:"Xask04klsddwkDslRoqwPerkiwepfjlcvnagjpasdçjargpajD"}))
 app.get("/", routes.index);
 app.get("/developer", routes.developers);
 app.get("/developer/:username", routes.developerByUsername);
+app.get("/cart-state", routes.cartFromSession);
+
+app.post("/cart", urlencodedParser, routes.addDeveloperToCart);
 app.use("/", urlencodedParser, express.static(__dirname + "/public/"));
-app.post("/cart", routes.addDeveloperToCart);
 
 var server = http.createServer(app).listen(port, function() {
     console.log('Listening on ' + port);

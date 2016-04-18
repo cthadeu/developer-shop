@@ -27,7 +27,17 @@ module.exports = {
 
     addDeveloperToCart: function(req, res) {
         cart = new Cart(req.session);
+        console.log(req.body);
         cart.addDeveloper(req.body);
         res.send(cart);
+    },
+
+    cartFromSession: function(req, res) {
+        cart = new Cart(req.session);
+        console.log("RECARREGANDO CARRINHO");
+        console.log(cart);
+        res.send(cart);
     }
+
+
 }

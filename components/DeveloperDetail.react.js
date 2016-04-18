@@ -7,7 +7,6 @@ module.exports = DeveloperDetail = React.createClass({
     },
 
     render: function () {
-        console.log(this.props.developer)
         return (
             <div className="row">
                 <div className="col-md-4">

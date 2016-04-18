@@ -11,7 +11,8 @@ module.exports = Cart = React.createClass({
 
         return {
             total:0,
-            items:[]
+            items:[],
+            btnCheckoutDisabledState:true
         };
     },
 
@@ -26,11 +27,18 @@ module.exports = Cart = React.createClass({
     addItem: function(e, item){
         this.state.items.push(item);
         this.countTotal();
+        this.changeCheckoutButtonState();
         this.forceUpdate();
     },
 
-    doCheckout: function(){
+    changeCheckoutButtonState: function(){
+        if (this.state.items.length > 0) {
+            this.setState({btnCheckoutDisabledState:false});
+        }
+    },
 
+    doCheckout: function(){
+        console.log(this.state.items);
     },
 
     render: function () {
@@ -46,7 +54,7 @@ module.exports = Cart = React.createClass({
                 <li className="list-group-item">
                     <div className="row">
                         <div className="col-sm-6">
-                            <button className="btn btn-danger" onClick={this.doCheckout}>Checkout</button>
+                            <button className="btn btn-danger" disabled={this.state.btnCheckoutDisabledState} onClick={this.doCheckout}>Checkout</button>
                         </div>
                         <div className="col-sm-6">
                             <h4 className="pull-right">Total: ${this.state.total}</h4>

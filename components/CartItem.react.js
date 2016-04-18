@@ -27,7 +27,7 @@ module.exports = CartItem = React.createClass({
                         </div>
                         <div className="media-body">
                             <h4 className="media-heading">{this.props.dev.name}</h4>
-                            <input type="text" size="2" onChange={this.changeHourValue} value={this.props.dev.baseHour}/> hour(s)
+                            <input type="text" size="2" className="form-control col-md-1"  onChange={this.changeHourValue} value={this.props.dev.baseHour}/> hour(s)
                         </div>
                         <div className="media-right">
                             <h4 className="text-success">${this.state.unity_price}</h4>

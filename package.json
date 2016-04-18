@@ -6,7 +6,8 @@
     "watch": "watchify app.js -o public/js/bundle.js -v",
     "browserify": "browserify app.js | uglifyjs > public/js/bundle.js",
     "build": "npm run browserify ",
-    "start": "npm run build | node server"
+    "start": "npm run build | node server",
+    "test":"make test"
   },
   "author": "Cyro Thadeu",
   "dependencies": {
@@ -26,8 +27,8 @@
     "uglify-js": "~2.4.15",
     "watchify": "~2.0.0",
     "mocha": "~1.14.0",
-    "chai": "~1.8.1"
-
+    "chai": "~3.2.0",
+    "chai-http": "~1.0.0"
   },
   "browserify": {
     "transform": [

@@ -25,15 +25,9 @@ module.exports = DeveloperProfile = React.createClass({
         )
     },
 
-    updateCart: function(items) {
-        console.log("recarregando carrinho");
-        React.renderComponent(<Cart items={items} />, document.getElementById("cart-items"));
-    },
-
+    
     addToCartClick: function(){
-        $.post("/cart", this.state.developer, function(data) {
-            this.updateCart(data.session.items);
-        }.bind(this));
+        $.publish('cart.added', this.state.developer);
     },
 
     render: function () {

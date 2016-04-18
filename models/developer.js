@@ -7,6 +7,7 @@ function Developer(id, login, photo) {
     this.name = "";
     this.price = 0;
     this.profile = "";
+    this.baseHour = 1;
 }
 
 Developer.prototype.findByUsername = function(username, callback) {

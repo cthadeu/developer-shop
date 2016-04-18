@@ -5,48 +5,55 @@ var Popover = require("./Popover.react");
 
 module.exports = Cart = React.createClass({
     getInitialState: function() {
+
+        $.subscribe('hour.increased', this.countTotal);
+        $.subscribe('cart.added', this.addItem);
+
         return {
-            visible:true
+            total:0,
+            items:[]
         };
     },
 
-    componentDidMount: function () {
-        $.get("/cart-state", function(data){
-            if (this.isMounted()) {
-                console.log("DADOS SESSAO");
-                console.log(data);
-                this.setState({items:data.session.items});
-                this.updateItems(data.session.items);
-            }
-        }.bind(this));
+    countTotal: function(){
+        var total = 0;
+        this.state.items.forEach(function(item, index){
+            total += item.price * item.baseHour;
+        });
+        this.setState({total:total});
     },
 
-    updateItems: function(items){
-        React.renderComponent(
-            <CartItem devs={items} />,
-            document.getElementById("citems")
-        );
+    addItem: function(e, item){
+        this.state.items.push(item);
+        this.countTotal();
+        this.forceUpdate();
     },
 
-    handleClick: function(e){
-        e.preventDefault();
-        this.setState({visible: !this.state.visible});
-    },
+    doCheckout: function(){
 
+    },
 
     render: function () {
-        var items = [];
-        if (this.props.items != null) {
-            items = this.props.items;
-        } else if (this.state.items != null) {
-            items = this.state.items;
-        }
-
         return (
-                <a href="#" className="btn btn-block btn-danger" >
-                    Cart {items.length}
+            <div className="list-group">
+                <a href="#" className="list-group-item active">
+                    Cart
+                    <span className="badge ">{this.state.items.length}</span>
                 </a>
-
+                {this.state.items.map(function(dev){
+                    return(<CartItem dev={dev} />)
+                })}
+                <li className="list-group-item">
+                    <div className="row">
+                        <div className="col-sm-6">
+                            <button className="btn btn-danger" onClick={this.doCheckout}>Checkout</button>
+                        </div>
+                        <div className="col-sm-6">
+                            <h4 className="pull-right">Total: ${this.state.total}</h4>
+                        </div>
+                    </div>
+                </li>
+            </div>
         )
     }
 });

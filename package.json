@@ -2,6 +2,9 @@
   "name": "developer-shop",
   "version": "0.0.1",
   "main": "app.js",
+  "engines": {
+    "node":"5.9.1"
+  },
   "scripts": {
     "watch": "watchify app.js -o public/js/bundle.js -v",
     "browserify": "browserify app.js | uglifyjs > public/js/bundle.js",
@@ -11,7 +14,7 @@
   },
   "author": "Cyro Thadeu",
   "dependencies": {
-    "express": "~4.9.7",
+    "express": "~4.13.3",
     "express-handlebars": "~1.1.0",
     "mongoose": "^3.8.17",
     "node-jsx": "~0.11.0",

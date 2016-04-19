@@ -21,14 +21,14 @@
     "react": "~0.11.2",
     "github":"^0.2.4",
     "body-parser":"^1.15.0",
-    "express-session": "^1.7.6"
-  },
-  "devDependencies": {
-    "nodemon": "^1.2.1",
+    "express-session": "^1.7.6",
     "browserify": "~6.0.3",
     "reactify": "~0.14.0",
     "uglify-js": "~2.4.15",
-    "watchify": "~2.0.0",
+    "watchify": "~2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.2.1",
     "mocha": "~1.14.0",
     "chai": "~3.2.0",
     "chai-http": "~1.0.0"

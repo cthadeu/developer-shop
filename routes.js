@@ -4,7 +4,6 @@ var JSX = require('node-jsx').install();
 var React = require('react');
 var Cart = require("./models/cart");
 
-var sess;
 
 module.exports = {
     index: function(req, res) {
@@ -31,10 +30,25 @@ module.exports = {
         res.send(cart);
     },
 
+    checkout: function(req, res) {
+        cart = new Cart(req.session);
+        res.send(cart);
+    },
+
+    checkCupom: function(req, res) {
+        console.log(req.body);
+        if (req.body.cupom == "SHIPIT") {
+            res.send("10");
+        } else {
+            res.send(400).end();
+        }
+    },
+
     cartFromSession: function(req, res) {
         cart = new Cart(req.session);
-        console.log("RECARREGANDO CARRINHO");
-        console.log(cart);
+        req.session.destroy(function(err) {
+            console.log(err);
+        })
         res.send(cart);
     }
 

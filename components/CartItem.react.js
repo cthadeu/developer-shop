@@ -16,8 +16,17 @@ module.exports = CartItem = React.createClass({
 
     render: function () {
 
+        var hourInputText;
+
+        if (this.props.edit) {
+            hourInputText = (<div className="input-group" >
+                                <input type="number" className="qtHour"  onChange={this.changeHourValue} value={this.props.dev.baseHour} /> hour
+                            </div>);
+        } else {
+            hourInputText = (<h5>Hours: {this.props.dev.baseHour}</h5>)
+        }
+
         return (
-            <div>
                 <li className="list-group-item">
                     <div className="media">
                         <div className="media-left">
@@ -27,14 +36,13 @@ module.exports = CartItem = React.createClass({
                         </div>
                         <div className="media-body">
                             <h4 className="media-heading">{this.props.dev.name}</h4>
-                            <input type="text" size="2" className="form-control col-md-1"  onChange={this.changeHourValue} value={this.props.dev.baseHour}/> hour(s)
+                            {hourInputText}
                         </div>
                         <div className="media-right">
-                            <h4 className="text-success">${this.state.unity_price}</h4>
+                            <h4 className="text-info">${this.state.unity_price}</h4>
                         </div>
                     </div>
                 </li>
-            </div>
         )
     }
 

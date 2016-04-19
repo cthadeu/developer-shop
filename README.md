@@ -1,5 +1,5 @@
-# developer-shop
-Loja Vritual de Desenvolvedores
+# DeveloperShop
+Loja Virtual de Desenvolvedores
 
 ## Objetivo
 

@@ -15,14 +15,17 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine","handlebars");
-app.use(session({secret:"Xask04klsddwkDslRoqwPerkiwepfjlcvnagjpasdçjargpajD"}));
+app.use(session({
+    secret: 'Xask04klsddwkDslRoqwPerkiwepfjlcvnagjpasdçjargpajD'
+}));
 
 app.get("/", routes.index);
 app.get("/developer", routes.developers);
 app.get("/developer/:username", routes.developerByUsername);
-app.get("/cart-state", routes.cartFromSession);
-
+app.get("/cart", routes.cartFromSession);
 app.post("/cart", urlencodedParser, routes.addDeveloperToCart);
+app.post("/checkout", urlencodedParser, routes.checkout);
+app.post("/cupom/check", urlencodedParser, routes.checkCupom);
 app.use("/", urlencodedParser, express.static(__dirname + "/public/"));
 
 var server = http.createServer(app).listen(port, function() {

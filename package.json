@@ -7,11 +7,11 @@
     "browserify": "browserify app.js | uglifyjs > public/js/bundle.js",
     "build": "npm run browserify ",
     "start": "npm run build | node server",
-    "test":"make test"
+    "test": "jasmine-node spec"
   },
   "author": "Cyro Thadeu",
   "engines": {
-    "node":"5.9.1"
+    "node": "5.9.1"
   },
   "dependencies": {
     "express": "~4.13.3",
@@ -19,19 +19,22 @@
     "mongoose": "^4.4.12",
     "node-jsx": "~0.11.0",
     "react": "~0.11.2",
-    "github":"^0.2.4",
-    "body-parser":"^1.15.0",
+    "github": "^0.2.4",
+    "body-parser": "^1.15.0",
     "express-session": "^1.7.6",
     "browserify": "~6.0.3",
     "reactify": "~0.14.0",
     "uglify-js": "~2.4.15",
-    "watchify": "~2.0.0"
+    "watchify": "~2.0.0",
+    "request": "~2.72.0"
   },
   "devDependencies": {
     "nodemon": "^1.2.1",
     "mocha": "~1.14.0",
     "chai": "~3.2.0",
-    "chai-http": "~1.0.0"
+    "chai-http": "~1.0.0",
+    "supertest": "~1.2.0",
+    "jasmine-node": "~1.14.5"
   },
   "browserify": {
     "transform": [

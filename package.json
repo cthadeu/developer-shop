@@ -2,9 +2,6 @@
   "name": "developer-shop",
   "version": "0.0.1",
   "main": "app.js",
-  "engines": {
-    "node":"5.9.1"
-  },
   "scripts": {
     "watch": "watchify app.js -o public/js/bundle.js -v",
     "browserify": "browserify app.js | uglifyjs > public/js/bundle.js",
@@ -13,6 +10,9 @@
     "test":"make test"
   },
   "author": "Cyro Thadeu",
+  "engines": {
+    "node":"5.9.1"
+  },
   "dependencies": {
     "express": "~4.13.3",
     "express-handlebars": "~1.1.0",
@@ -22,7 +22,7 @@
     "github":"^0.2.4",
     "body-parser":"^1.15.0",
     "express-session": "^1.7.6",
-    "browserify": "~6.0.3",
+    "browserify": "~6.0.3"
   },
   "devDependencies": {
     "nodemon": "^1.2.1",
@@ -37,5 +37,9 @@
     "transform": [
       "reactify"
     ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cthadeu/developer-shop.git"
   }
 }

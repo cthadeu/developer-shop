@@ -12,10 +12,4 @@ var github = new GitHubApi({
     }
 });
 
-github.authenticate({
-    type: "basic",
-    username: "cthadeu",
-    password: "ctfg2005"
-});
-
 module.exports = github;

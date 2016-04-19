@@ -10,7 +10,6 @@ var express = require('express'),
 
 var app = express();
 var port = process.env.PORT || 8080;
-var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
@@ -19,14 +18,17 @@ app.use(session({
     secret: 'Xask04klsddwkDslRoqwPerkiwepfjlcvnagjpasdçjargpajD'
 }));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.get("/", routes.index);
 app.get("/developer", routes.developers);
 app.get("/developer/:username", routes.developerByUsername);
 app.get("/cart", routes.cartFromSession);
-app.post("/cart", urlencodedParser, routes.addDeveloperToCart);
-app.post("/checkout", urlencodedParser, routes.checkout);
-app.post("/cupom/check", urlencodedParser, routes.checkCupom);
-app.use("/", urlencodedParser, express.static(__dirname + "/public/"));
+app.post("/cart", routes.addDeveloperToCart);
+app.post("/checkout", routes.checkout);
+app.post("/cupom/check", routes.checkCupom);
+app.use("/", express.static(__dirname + "/public/"));
 
 var server = http.createServer(app).listen(port, function() {
     console.log('Listening on ' + port);

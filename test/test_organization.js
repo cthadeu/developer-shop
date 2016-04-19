@@ -9,7 +9,6 @@ describe("Organization", function(){
                 expect(data).to.have.length.of.at.least(1);
                 done();
             });
-
         })
     });
 });

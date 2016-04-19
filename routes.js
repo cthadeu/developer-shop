@@ -26,12 +26,16 @@ module.exports = {
 
     addDeveloperToCart: function(req, res) {
         cart = new Cart(req.session);
+        console.log(req.body);
         cart.addDeveloper(req.body);
         res.send(cart);
     },
 
     checkout: function(req, res) {
         cart = new Cart(req.session);
+        req.session.destroy(function(err) {
+            console.log(err);
+        });
         res.send(cart);
     },
 
@@ -46,9 +50,6 @@ module.exports = {
 
     cartFromSession: function(req, res) {
         cart = new Cart(req.session);
-        req.session.destroy(function(err) {
-            console.log(err);
-        })
         res.send(cart);
     }
 

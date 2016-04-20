@@ -27,11 +27,13 @@ module.exports = CartItem = React.createClass({
     render: function () {
 
         var hourInputText;
+        var removeBtn;
 
         if (this.props.edit) {
             hourInputText = (<div className="input-group" >
                                 <input type="number" className="qtHour" min="1" step="1"  onChange={this.changeHourValue} value={this.props.dev.baseHour} /> hour
                             </div>);
+            removeBtn = (<button className="btn btn-xs btn-danger" onClick={this.remove}><span className="glyphicon glyphicon-remove"></span></button>);
         } else {
             hourInputText = (<h5>Hours: {this.props.dev.baseHour}</h5>)
         }
@@ -50,7 +52,7 @@ module.exports = CartItem = React.createClass({
                         </div>
                         <div className="media-right">
                             <h4 className="text-info">${this.props.dev.price * this.props.dev.baseHour}</h4>
-                            <button className="btn btn-xs btn-danger" onClick={this.remove}><span className="glyphicon glyphicon-remove"></span></button>
+                            {removeBtn}
                         </div>
                     </div>
                 </li>

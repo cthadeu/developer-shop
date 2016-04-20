@@ -7,7 +7,7 @@
     "browserify": "browserify app.js | uglifyjs > public/js/bundle.js",
     "build": "npm run browserify ",
     "start": "npm run build | node server",
-    "test": "jasmine-node spec"
+    "test": "mocha"
   },
   "author": "Cyro Thadeu",
   "engines": {

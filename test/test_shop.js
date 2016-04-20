@@ -1,5 +1,6 @@
 var supertest = require("supertest");
 var should = require("should");
+var server = require("../server");
 
 var server = supertest.agent("http://localhost:8080");
 
@@ -47,6 +48,17 @@ describe("DevShop", function(){
                res.body.discount.should.be.equal(10);
                done();
            });
+    });
+
+    it("should return not found with invalid cupom", function(done){
+        server
+            .post("/cupom/check")
+            .send({cupom : "DISCOUNT"})
+            .expect("Content-type",/json/)
+            .expect(400)
+            .end(function(err,res){
+                done();
+            });
     });
 
     it("should checkout cart", function(done){

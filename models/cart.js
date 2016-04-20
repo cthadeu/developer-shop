@@ -1,5 +1,6 @@
 function Cart(session) {
     this.session = session;
+    this.discount = (session.discount != undefined) ? session.discount : 0;
     this.email = "";
 }
 
@@ -29,6 +30,7 @@ Cart.prototype.remove = function(dev) {
 }
 
 Cart.prototype.addDiscount = function(value){
+    this.discount = value;
     this.session.discount = value;
 }
 

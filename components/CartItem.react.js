@@ -11,7 +11,10 @@ module.exports = CartItem = React.createClass({
     changeHourValue: function (event) {
         this.props.dev.baseHour = event.target.value;
         this.setState({unity_price: this.props.dev.baseHour * this.props.dev.price});
-        $.publish('hour.increased', this.props.dev);
+        $.post("/cart/update", {dev: JSON.stringify(this.props.dev)}, function(data){
+            $.publish('hour.increased');
+        }.bind(this));
+
     },
 
     render: function () {

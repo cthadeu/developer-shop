@@ -38,8 +38,8 @@ module.exports = Cart = React.createClass({
         $.post("/cupom/check", {cupom:event.target.value}, function(data){
             console.log(data);
             if (data != null) {
-                this.setState({discountValue: data, discountInfo:"- $"+data});
-                var newTotal = this.state.total - data;
+                this.setState({discountValue: parseFloat(data.discount), discountInfo:"- $"+parseFloat(data.discount)});
+                var newTotal = this.state.total - parseFloat(data.discount);
                 this.setState({total:newTotal});
                 this.forceUpdate();
             }
@@ -63,8 +63,8 @@ module.exports = Cart = React.createClass({
     },
 
     doCheckout: function(){
-        $.post("/checkout", JSON.stringify(this.state.items), function(data){
-           React.renderComponent(<Checkout items={data.session.items}  />, document.getElementById("react-container"));
+        $.post("/checkout", function(data){
+           React.renderComponent(<Checkout items={data.session.items}  discount={data.session.discount} total={this.state.total} />, document.getElementById("react-container"));
         }.bind(this));
     },
 

@@ -26,7 +26,6 @@ module.exports = {
 
     addDeveloperToCart: function(req, res) {
         cart = new Cart(req.session);
-        console.log(req.body);
         cart.addDeveloper(req.body);
         res.send(cart);
     },
@@ -40,18 +39,25 @@ module.exports = {
     },
 
     checkCupom: function(req, res) {
-        console.log(req.body);
+        cart = new Cart(req.session);
         if (req.body.cupom == "SHIPIT") {
-            res.send("10");
+            cart.addDiscount(10);
+            res.send({discount:cart.discount});
         } else {
-            res.send(400).end();
+            res.sendStatus(400);
         }
     },
 
     cartFromSession: function(req, res) {
         cart = new Cart(req.session);
         res.send(cart);
-    }
+    },
 
+    increaseHourFromDeveloper: function(req, res) {
+        cart = new Cart(req.session);
+        cart.updateItem(JSON.parse(req.body.dev));
+        console.log(cart.session.items);
+        res.send(cart);
+    }
 
 }

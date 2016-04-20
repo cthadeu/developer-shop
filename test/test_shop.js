@@ -1,9 +1,7 @@
 var supertest = require("supertest");
 var should = require("should");
-var server = require("../server");
-
+var app = require("../server");
 var server = supertest.agent("http://localhost:8080");
-
 
 describe("DevShop", function(){
     it("should list developers from org vtex", function(done){

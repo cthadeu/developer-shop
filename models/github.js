@@ -13,9 +13,8 @@ var github = new GitHubApi({
 });
 
 github.authenticate({
-    type: "basic",
-    username: "cthadeu",
-    password: "ctfg2005"
+    type: "oauth",
+    token:"2b04c55754709179fe6bad099293b68e65120793"
 });
 
 module.exports = github;

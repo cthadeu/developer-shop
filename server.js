@@ -27,6 +27,7 @@ app.get("/developer/:username", routes.developerByUsername);
 app.get("/cart", routes.cartFromSession);
 app.post("/cart", routes.addDeveloperToCart);
 app.post("/cart/update", routes.increaseHourFromDeveloper);
+app.post("/cart/remove", routes.removeDeveloperFromCart);
 app.post("/checkout", routes.checkout);
 app.post("/cupom/check", routes.checkCupom);
 app.use("/", express.static(__dirname + "/public/"));

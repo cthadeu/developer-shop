@@ -4,17 +4,24 @@ var React = require('react');
 module.exports = CartItem = React.createClass({
     getInitialState: function () {
         return {
-            unity_price:this.props.dev.price
+            unity_price: 0
         };
+    },
+
+    componentDidMount: function(){
+        this.setState({unity_price:this.props.dev.price});
     },
 
     changeHourValue: function (event) {
         this.props.dev.baseHour = event.target.value;
-        this.setState({unity_price: this.props.dev.baseHour * this.props.dev.price});
         $.post("/cart/update", {dev: JSON.stringify(this.props.dev)}, function(data){
             $.publish('hour.increased');
+            this.forceUpdate();
         }.bind(this));
+    },
 
+    remove: function(event){
+        $.publish("cart.removed", this.props.dev);
     },
 
     render: function () {
@@ -23,7 +30,7 @@ module.exports = CartItem = React.createClass({
 
         if (this.props.edit) {
             hourInputText = (<div className="input-group" >
-                                <input type="number" className="qtHour"  onChange={this.changeHourValue} value={this.props.dev.baseHour} /> hour
+                                <input type="number" className="qtHour" min="1" step="1"  onChange={this.changeHourValue} value={this.props.dev.baseHour} /> hour
                             </div>);
         } else {
             hourInputText = (<h5>Hours: {this.props.dev.baseHour}</h5>)
@@ -42,7 +49,8 @@ module.exports = CartItem = React.createClass({
                             {hourInputText}
                         </div>
                         <div className="media-right">
-                            <h4 className="text-info">${this.state.unity_price}</h4>
+                            <h4 className="text-info">${this.props.dev.price * this.props.dev.baseHour}</h4>
+                            <button className="btn btn-xs btn-danger" onClick={this.remove}><span className="glyphicon glyphicon-remove"></span></button>
                         </div>
                     </div>
                 </li>

@@ -48,6 +48,12 @@ module.exports = {
         }
     },
 
+    removeDeveloperFromCart: function(req, res) {
+        cart = new Cart(req.session);
+        cart.remove(req.body);
+        res.send(cart);
+    },
+
     cartFromSession: function(req, res) {
         cart = new Cart(req.session);
         res.send(cart);

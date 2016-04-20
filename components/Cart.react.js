@@ -7,6 +7,7 @@ module.exports = Cart = React.createClass({
     getInitialState: function() {
         $.subscribe('hour.increased', this.countTotal);
         $.subscribe('cart.added', this.addItem);
+        $.subscribe("cart.removed", this.removeItem);
 
         return {
             total:0,
@@ -46,15 +47,26 @@ module.exports = Cart = React.createClass({
         }.bind(this));
     },
 
+    updateCart: function(data){
+        console.log(data.session.items);
+        this.setState({items:data.session.items});
+        this.countTotal();
+        this.forceUpdate();
+        this.changeCheckoutButtonState();
+
+    },
+
     addItem: function(e, item){
         $.post("/cart", item, function(data){
-            this.setState({items:data.session.items});
-            this.countTotal();
-            this.changeCheckoutButtonState();
-            this.forceUpdate();
+            this.updateCart(data);
         }.bind(this));
     },
 
+    removeItem: function(e, item) {
+        $.post("/cart/remove", item, function(data){
+            this.updateCart(data);
+        }.bind(this));
+    },
 
     changeCheckoutButtonState: function(){
         if (this.state.items.length > 0) {

@@ -5,18 +5,24 @@ var express = require('express'),
     routes = require('./routes'),
     bodyParser = require('body-parser'),
     session = require('express-session');
+    Organization = require("./models/organization");
     // config = require('./config'),
 
 
 var app = express();
 var port = process.env.PORT || 8080;
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var members = [];
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine","handlebars");
 app.use(session({
     secret: 'Xask04klsddwkDslRoqwPerkiwepfjlcvnagjpasdçjargpajD'
 }));
+
+new Organization().listMembers(function(data){
+    members = data;
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

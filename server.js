@@ -5,7 +5,7 @@ var express = require('express'),
     routes = require('./routes'),
     bodyParser = require('body-parser'),
     session = require('express-session');
-    Organization = require("./models/organization");
+    
     // config = require('./config'),
 
 
@@ -20,9 +20,6 @@ app.use(session({
     secret: 'Xask04klsddwkDslRoqwPerkiwepfjlcvnagjpasdçjargpajD'
 }));
 
-new Organization().listMembers(function(data){
-    members = data;
-});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

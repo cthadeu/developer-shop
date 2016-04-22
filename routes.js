@@ -4,6 +4,13 @@ var JSX = require('node-jsx').install();
 var React = require('react');
 var Cart = require("./models/cart");
 
+var members = [];
+
+new Organization().listMembers(function(data){
+    members = data;
+});
+
+
 
 module.exports = {
     index: function(req, res) {
@@ -11,10 +18,7 @@ module.exports = {
     },
 
     developers: function (req, res) {
-        var org = new Organization("vtex");
-        org.listMembers(function (data) {
-            res.send(data);
-        })
+        res.send(members);
     },
 
     developerByUsername: function(req, res) {

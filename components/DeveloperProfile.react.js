@@ -25,7 +25,6 @@ module.exports = DeveloperProfile = React.createClass({
         )
     },
 
-    
     addToCartClick: function(){
         $.publish('cart.added', this.state.developer);
     },

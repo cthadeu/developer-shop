@@ -5,12 +5,13 @@ var Checkout = require("./Checkout.react");
 
 module.exports = Cart = React.createClass({
     getInitialState: function() {
+
         $.subscribe('hour.increased', this.countTotal);
         $.subscribe('cart.added', this.addItem);
         $.subscribe("cart.removed", this.removeItem);
 
         return {
-            total:0,
+            total:0,        
             items:[],
             btnCheckoutDisabledState:true
         };
@@ -19,7 +20,7 @@ module.exports = Cart = React.createClass({
     componentDidMount: function(){
         $.get("/cart", function(data){
            if (data.session.items != null) {
-               this.setState({items:data.session.items});
+               this.setState({items:data.session.items});        
                this.countTotal();
                this.changeCheckoutButtonState();
                this.forceUpdate();
@@ -48,12 +49,10 @@ module.exports = Cart = React.createClass({
     },
 
     updateCart: function(data){
-        console.log(data.session.items);
         this.setState({items:data.session.items});
         this.countTotal();
         this.forceUpdate();
         this.changeCheckoutButtonState();
-
     },
 
     addItem: function(e, item){
@@ -69,9 +68,7 @@ module.exports = Cart = React.createClass({
     },
 
     changeCheckoutButtonState: function(){
-        if (this.state.items.length > 0) {
-            this.setState({btnCheckoutDisabledState:false});
-        }
+        this.setState({btnCheckoutDisabledState:(this.state.items.length == 0)});
     },
 
     doCheckout: function(){
@@ -94,7 +91,7 @@ module.exports = Cart = React.createClass({
                 <li className="list-group-item">
                     <div className="row">
                         <div className="col-sm-6">
-                            <input type="text" className="form-control"  placeholder="Cupom" onChange={this.checkCupom} />
+                            <input type="text" className="form-control" disabled={this.state.btnCheckoutDisabledState}  placeholder="Cupom" onChange={this.checkCupom} />
                         </div>
                         <div className="col-sm-6">
                             <h4 className="text-danger pull-right">{this.state.discountInfo}</h4>
@@ -106,7 +103,7 @@ module.exports = Cart = React.createClass({
                         <div className="col-sm-6 btn-group">
                             <button className="btn btn-success" disabled={this.state.btnCheckoutDisabledState} onClick={this.doCheckout}>Checkout</button>
                         </div>
-                        <div className="col-sm-6">
+                        <div className="col-sm-6">        
                             <h4 className="pull-right text-info">
                                 Total: $ {this.state.total}
                             </h4>

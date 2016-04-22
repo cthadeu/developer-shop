@@ -7,6 +7,7 @@ describe("Organization", function(){
             var org = new Organization("vtex");
             org.listMembers(function(data) {
                 expect(data).to.have.length.of.at.least(1);
+                expect(data).to.be.not.empty;
                 done();
             });
         })

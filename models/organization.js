@@ -1,5 +1,5 @@
 var github = require("./github")
-var Developer = require("./developer")
+var Developer = require("./developer");
 
 function Organization(name) {
     this.name = name;

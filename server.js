@@ -4,14 +4,11 @@ var express = require('express'),
     mongoose = require('mongoose'),
     routes = require('./routes'),
     bodyParser = require('body-parser'),
-    session = require('express-session'),
-    microdb = require('nodejs-microdb');
-   // config = require('./config'),
+    session = require('express-session');
 
 var app = express();
-var port = process.env.PORT || 8080;
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
+var port = process.env.PORT || 3000;
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
 app.engine("handlebars", exphbs({defaultLayout: "main"}));

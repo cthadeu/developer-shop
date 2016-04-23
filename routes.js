@@ -1,17 +1,6 @@
 var Organization = require("./models/organization");
 var Developer = require("./models/developer");
-var JSX = require('node-jsx').install();
-var React = require('react');
 var Cart = require("./models/cart");
-var microdb = require('nodejs-microdb');
-
-
-var members = [];
-new Organization().listMembers(function(data){
-    data.forEach(function(key){
-        members.push(key);
-    });
-});
 
 module.exports = {
 
@@ -20,12 +9,13 @@ module.exports = {
     },
 
     developers: function (req, res) {
-        res.send(members);
+        new Organization().listMembers(function(data){
+            res.send(data);
+        });
     },
 
     developerByUsername: function(req, res) {
-        var dev = new Developer();
-        dev.findByUsername(req.param("username"), function(data){
+        new Developer().findByUsername(req.param("username"), function(data){
            res.send(data);
         });
     },

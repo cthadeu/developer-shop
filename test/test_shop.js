@@ -1,7 +1,7 @@
 var supertest = require("supertest");
 var should = require("should");
 var app = require("../server");
-var server = supertest.agent("http://localhost:8080");
+var server = supertest.agent("http://localhost:3000");
 
 describe("DevShop", function(){
     it("should list developers from org vtex", function(done){
@@ -10,6 +10,7 @@ describe("DevShop", function(){
            .expect("Content-type",/json/)
            .expect(200)
            .end(function(err,res){
+               console.log(res);
                res.body.should.not.be.empty();
                done();
            });

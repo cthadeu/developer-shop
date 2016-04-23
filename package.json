@@ -6,7 +6,7 @@
     "watch": "watchify app.js -o public/js/bundle.js -v",
     "browserify": "browserify app.js | uglifyjs > public/js/bundle.js",
     "build": "npm run browserify ",
-    "start": "npm run build | node server",
+    "start": "npm watch | npm run build | node server",
     "test": "mocha"
   },
   "author": "Cyro Thadeu",
@@ -26,9 +26,7 @@
     "reactify": "~0.14.0",
     "uglify-js": "~2.4.15",
     "watchify": "~2.0.0",
-    "request": "~2.72.0",
-    "nodejs-microdb": "0.0.2",
-    "promise": "~7.1.1"
+    "request": "~2.72.0"
   },
   "devDependencies": {
     "chai": "~3.2.0",

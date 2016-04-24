@@ -1,4 +1,4 @@
-var github = require("./github")
+var github = require("./github");
 
 function Developer(id, login, photo) {
     this.id = id;
@@ -19,5 +19,22 @@ Developer.prototype.findByUsername = function(username, callback) {
     });
 }
 
+Developer.prototype.findRepositoriesByUsername = function(username, callback) {
+    github.repos.getFromUser({user: username}, function(err, res){
+       callback(res);
+    });
+}
+
+Developer.prototype.getDeveloperSkills = function(username, callback){
+    this.findRepositoriesByUsername(username, function(data){
+        var skills = [];
+        data.forEach(function(repo){
+            if (skills.indexOf(repo.language) < 0 && repo.language != null) {
+                skills.push(repo.language);
+            }
+        });
+        callback(skills);
+    });
+}
 
 module.exports = Developer;

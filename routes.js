@@ -20,6 +20,12 @@ module.exports = {
         });
     },
 
+    developerSkills: function(req, res) {
+        new Developer().getDeveloperSkills(req.param("username"), function(data) {
+            res.send(data);
+        });
+    },
+
     addDeveloperToCart: function(req, res) {
         cart = new Cart(req.session);
         cart.addDeveloper(req.body);

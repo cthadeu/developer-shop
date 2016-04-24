@@ -10,7 +10,6 @@ describe("DevShop", function(){
            .expect("Content-type",/json/)
            .expect(200)
            .end(function(err,res){
-               console.log(res);
                res.body.should.not.be.empty();
                done();
            });

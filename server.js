@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get("/", routes.index);
 app.get("/developer", routes.developers);
 app.get("/developer/:username", routes.developerByUsername);
+app.get("/developer/:username/skills", routes.developerSkills);
 app.get("/cart", routes.cartFromSession);
 app.post("/cart", routes.addDeveloperToCart);
 app.post("/cart/update", routes.increaseHourFromDeveloper);

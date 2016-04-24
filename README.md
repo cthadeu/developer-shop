@@ -5,7 +5,7 @@ Loja Virtual de Desenvolvedores VTEX
 * NodeJS
 * ReactJS
 * Twitter Bootstrap
-* Criado uma API REST para ser consumida via AJAX pela página da loja
+* API REST para ser consumida via AJAX pela página da loja
 * Testes com Mocha
 
 

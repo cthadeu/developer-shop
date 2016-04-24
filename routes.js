@@ -36,6 +36,7 @@ module.exports = {
 
     checkCupom: function(req, res) {
         cart = new Cart(req.session);
+        cart.resetCupom();
         if (req.body.cupom == "SHIPIT") {
             cart.addDiscount(10);
             res.send({discount:cart.discount});

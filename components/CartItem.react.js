@@ -26,17 +26,15 @@ module.exports = CartItem = React.createClass({
 
     render: function () {
 
-        var hourInputText;
-        var removeBtn;
+        var hourInputText = (this.props.edit) ? (<div className="input-group" >
+                                                    <input type="number" className="qtHour" min="1" step="1"
+                                                           onChange={this.changeHourValue}
+                                                           value={this.props.dev.baseHour} /> hour</div>)
+                                               : (<h5>Hours: {this.props.dev.baseHour}</h5>);
 
-        if (this.props.edit) {
-            hourInputText = (<div className="input-group" >
-                                <input type="number" className="qtHour" min="1" step="1"  onChange={this.changeHourValue} value={this.props.dev.baseHour} /> hour
-                            </div>);
-            removeBtn = (<button className="btn btn-xs btn-danger" onClick={this.remove}><span className="glyphicon glyphicon-remove"></span></button>);
-        } else {
-            hourInputText = (<h5>Hours: {this.props.dev.baseHour}</h5>)
-        }
+        var removeBtn = (this.props.edit) ? (<button className="btn btn-xs btn-danger"
+                                                     onClick={this.remove}><span className="glyphicon glyphicon-remove"></span></button>) : "";
+
 
         return (
                 <li className="list-group-item">

@@ -12,9 +12,11 @@ module.exports = Checkout = React.createClass({
     render: function () {
         var items = [];
         var discount;
+
         if (this.props.items != undefined) {
             items = this.props.items;
         }
+
         if (this.props.discount != undefined) {
             discount = (<li className="list-group-item">
                 <div className="row">
@@ -35,7 +37,7 @@ module.exports = Checkout = React.createClass({
                 </div>
                 <hr />
                 <div className="col-md-6 col-md-offset-3">
-                    <h4>Order Resume</h4>
+                    <h4>Order Detail</h4>
                     <ul className="list-group">
                         {items.map(function(dev){
                             return(<CartItem dev={dev} edit={false} />)
@@ -53,9 +55,8 @@ module.exports = Checkout = React.createClass({
                             </div>
                         </li>
                     </ul>
-
+                    <a href="/" className="btn btn-success center-block">Finish</a>
                 </div>
-
             </div>
         )
     }

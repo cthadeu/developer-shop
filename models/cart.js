@@ -54,4 +54,9 @@ Cart.prototype.getItems = function(){
     return items;
 }
 
+Cart.prototype.resetCupom = function(){
+    this.discount = 0;
+    this.session.discount = 0;
+}
+
 module.exports = Cart;

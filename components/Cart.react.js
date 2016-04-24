@@ -37,15 +37,26 @@ module.exports = Cart = React.createClass({
     },
     
     checkCupom: function(event) {
-        $.post("/cupom/check", {cupom:event.target.value}, function(data){
-            console.log(data);
-            if (data != null) {
-                this.setState({discountValue: parseFloat(data.discount), discountInfo:"- $"+parseFloat(data.discount)});
-                var newTotal = this.state.total - parseFloat(data.discount);
-                this.setState({total:newTotal});
-                this.forceUpdate();
-            }
-        }.bind(this));
+        $.ajax({
+            type: "POST",
+            url: "/cupom/check",
+            data: {cupom:event.target.value},
+            success: function(data){
+                this.setState({
+                    discountValue: parseFloat(data.discount),
+                    discountInfo:"- $"+parseFloat(data.discount),
+                    total:this.state.total - parseFloat(data.discount)
+                });
+            }.bind(this),
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log(textStatus);
+                this.countTotal();
+                this.setState({
+                    discountValue:0,
+                    discountInfo:""
+                });
+            }.bind(this)
+        });
     },
 
     updateCart: function(data){

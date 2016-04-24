@@ -28,7 +28,6 @@ describe("Developer", function(){
        it("should get list of developer skills", function(done){
           var dev = new Developer();
            dev.getDeveloperSkills("brenoc", function(data){
-               console.log(data);
               expect(data).to.be.not.empty;
               done();
            });

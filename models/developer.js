@@ -1,4 +1,5 @@
 var github = require("./github");
+var q = require("q");
 
 function Developer(id, login, photo) {
     this.id = id;
@@ -28,12 +29,11 @@ Developer.prototype.findRepositoriesByUsername = function(username, callback) {
 Developer.prototype.getDeveloperSkills = function(username, callback){
     this.findRepositoriesByUsername(username, function(data){
         var skills = [];
-        data.forEach(function(repo){
+        q.when(data.forEach(function(repo){
             if (skills.indexOf(repo.language) < 0 && repo.language != null) {
                 skills.push(repo.language);
             }
-        });
-        callback(skills);
+        }), callback(skills));
     });
 }
 

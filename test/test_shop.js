@@ -37,6 +37,17 @@ describe("DevShop", function(){
         });
     });
 
+    it("should return not found with invalid cupom", function(done){
+        server
+            .post("/cupom/check")
+            .send({cupom : "DISCOUNT"})
+            .expect("Content-type",/json/)
+            .expect(400)
+            .end(function(err,res){
+                done();
+            });
+    });
+
     it("should add $10 discount cupom SHIPIT", function(done){
        server
            .post("/cupom/check")
@@ -47,17 +58,6 @@ describe("DevShop", function(){
                res.body.discount.should.be.equal(10);
                done();
            });
-    });
-
-    it("should return not found with invalid cupom", function(done){
-        server
-            .post("/cupom/check")
-            .send({cupom : "DISCOUNT"})
-            .expect("Content-type",/json/)
-            .expect(400)
-            .end(function(err,res){
-                done();
-            });
     });
 
     it("should checkout cart", function(done){
